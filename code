@@ -1,0 +1,66 @@
+// Create the game board
+const board = [
+  ['', '', ''],
+  ['', '', ''],
+  ['', '', '']
+];
+
+// Player X starts the game
+let currentPlayer = 'X';
+
+// Function to check if a player has won
+function checkWin(player) {
+  // Check rows
+  for (let i = 0; i < 3; i++) {
+    if (board[i][0] === player && board[i][1] === player && board[i][2] === player) {
+      return true;
+    }
+  }
+
+  // Check columns
+  for (let i = 0; i < 3; i++) {
+    if (board[0][i] === player && board[1][i] === player && board[2][i] === player) {
+      return true;
+    }
+  }
+
+  // Check diagonals
+  if (board[0][0] === player && board[1][1] === player && board[2][2] === player) {
+    return true;
+  }
+  if (board[0][2] === player && board[1][1] === player && board[2][0] === player) {
+    return true;
+  }
+
+  return false;
+}
+
+// Function to make a move
+function makeMove(row, col) {
+  // Check if the move is valid
+  if (board[row][col] === '') {
+    // Make the move
+    board[row][col] = currentPlayer;
+
+    // Check if the current player has won
+    if (checkWin(currentPlayer)) {
+      console.log(`Player ${currentPlayer} wins!`);
+    } else {
+      // Switch to the next player
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    }
+  } else {
+    console.log('Invalid move. Please try again.');
+  }
+}
+
+// Example moves
+makeMove(0, 0); // Player X makes a move
+makeMove(1, 1); // Player O makes a move
+makeMove(0, 1); // Player X makes a move
+makeMove(1, 0); // Player O makes a move
+makeMove(0, 2); // Player X makes a move
+makeMove(2, 0); // Player O makes a move
+makeMove(1, 2); // Player X makes a move
+makeMove(2, 2); // Player O makes a move
+makeMove(2, 1); // Player X makes a move
